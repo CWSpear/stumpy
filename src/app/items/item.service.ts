@@ -10,13 +10,16 @@ import { Tunic } from './tunic';
 import { Shield } from './shield';
 
 import { SettingsService } from '../settings/settings.service';
+import { LocalStorageService } from '../local-storage.service';
 
 @Injectable()
 export class ItemService {
   constructor(
-    private _settings: SettingsService
+    private _settings: SettingsService,
+    private _localStorage: LocalStorageService
   ) {
-    this._items = Items;
+    // TODO get better key
+    this._items = this._localStorage.hasItem('ITEM_STORE') ? ItemService.deserialize(this._localStorage.getItem('ITEM_STORE')) : Items;
 
     this._itemMap = new Map<ItemKey, (state: number) => void>(
       [
@@ -71,6 +74,42 @@ export class ItemService {
   private _items: Map<ItemKey, Item>;
   private _itemMap: Map<ItemKey, (state: number) => void>;
   private _classMap: Map<ItemKey, () => any>;
+
+  // TODO isn't really an ITEM in serializable
+  static serialize(items: Map<ItemKey, Item>): string {
+    const serializable: { [key: string]: Item } = {};
+
+    items.forEach((item: Item, key: ItemKey) => {
+      serializable[key] = item;
+    });
+
+    console.log(serializable);
+    console.log(JSON.parse(JSON.stringify(serializable)));
+
+    return JSON
+      .stringify(serializable);
+  }
+
+  static deserialize(serialized: string): Map<ItemKey, Item> {
+    const deserialized: { [key: string]: Item } = JSON.parse(serialized);
+
+    const map: Map<ItemKey, Item> = new Map<ItemKey, Item>();
+
+    for (const key in deserialized) {
+      if (deserialized.hasOwnProperty(key)) {
+        const item: Item = deserialized[key];
+
+        map.set(key as ItemKey, new Item(
+          item['_name'],
+          item['_activeStates'],
+          item['_images'],
+          item['_state'],
+        ));
+      }
+    }
+
+    return map;
+  }
 
   get bomb(): number {
     return this.getItem(ItemKey.Bomb).state;
@@ -388,6 +427,8 @@ export class ItemService {
 
   setItemState(id: number, state: number): void {
     this._itemMap.get(id).call(this, state);
+
+    this._localStorage.setItem('ITEM_STORE', ItemService.serialize(this._items));
   }
 
   private getStandardItemClasses(id: number): any {

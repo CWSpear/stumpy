@@ -15,9 +15,10 @@ import { ItemKey } from './item-key';
 describe( 'The item service', () => {
   let itemService: ItemService;
   let settingsService: SettingsService;
+  let localStorageService: LocalStorageService;
 
   function reset() {
-    itemService = new ItemService( settingsService );
+    itemService = new ItemService( settingsService, localStorageService );
     itemService.reset();
   }
 
@@ -258,6 +259,18 @@ describe( 'The item service', () => {
       const classes = itemService.getItemClasses(ItemKey.Sword);
       expect( classes.isActive).toBeFalsy();
       expect( classes.sword1 ).toBeTruthy();
+    });
+  });
+
+  describe( 'serialization', () => {
+    beforeAll(() => {
+      localStorageService = new LocalStorageService();
+    });
+
+    beforeEach( reset );
+
+    it('should serialize the items', () => {
+      console.log(ItemService.serialize(itemService['_items']));
     });
   });
 
