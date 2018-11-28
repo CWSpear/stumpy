@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Worlds } from './world.repository';
 import { World } from './world';
+import { LocationKey } from '../item-locations/location-key';
+import { DungeonKey } from '../../dungeon/dungeon-key';
 
 @Component({
   selector: 'stumpy-world',
@@ -24,11 +26,11 @@ export class WorldComponent implements OnInit {
     return results;
   }
 
-  getItemIds(): Array<number> {
+  getItemIds(): Array<LocationKey> {
     return this.world.itemLocationIds;
   }
 
-  getDungeonIds(): Array<number> {
+  getDungeonIds(): Array<DungeonKey> {
     return this.world.dungeonLocationIds;
   }
 }

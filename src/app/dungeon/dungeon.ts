@@ -1,10 +1,10 @@
 import { EntranceLock } from './entrance-lock';
-import { Location } from './location';
+import { DungeonKey } from './dungeon-key';
 import { Reward } from './reward';
 
 export class Dungeon {
   constructor(
-    private _location: Location,
+    private _location: DungeonKey,
     private _dungeonAbbr: string,
     private _dungeonName: string,
     private _bossName: string,
@@ -23,7 +23,7 @@ export class Dungeon {
     this._retroChestCount = this._maxItemChests + this._maxSmallKeys;
   }
 
-  private _bossId: Location;
+  private _bossId: DungeonKey;
   private _itemChestCount: number;
   private _totalChestCount: number;
   private _retroChestCount: number;
@@ -31,7 +31,7 @@ export class Dungeon {
   private _isBossDefeated: boolean;
   private _hasBigKey: boolean;
 
-  get location(): Location {
+  get location(): DungeonKey {
     return this._location;
   }
   get dungeonAbbr(): string {
@@ -73,7 +73,7 @@ export class Dungeon {
   get hasBigKey(): boolean {
     return this._hasBigKey;
   }
-  get bossId(): Location {
+  get bossId(): DungeonKey {
     return this._bossId;
   }
   get entranceLock(): EntranceLock {
@@ -164,12 +164,17 @@ export class Dungeon {
       return;
     }
 
-    let number = this.bossId + 1;
-    if ( number === Location.GanonsTower ) {
-      number = Location.EasternPalace;
+    const dungeons: DungeonKey[] = Object.keys(DungeonKey) as DungeonKey[];
+
+    const index = dungeons.indexOf(this.bossId);
+    const nextIndex = index + 1;
+
+    let next: DungeonKey = dungeons[nextIndex];
+    if ( next === DungeonKey.GanonsTower ) {
+      next = DungeonKey.EasternPalace;
     }
 
-    this._bossId = number;
+    this._bossId = next;
   }
 
   cycleBossBackward(): void {
@@ -177,12 +182,17 @@ export class Dungeon {
       return;
     }
 
-    let number = this.bossId - 1;
-    if ( number === Location.CastleTower ) {
-      number = Location.TurtleRock;
+    const dungeons: DungeonKey[] = Object.keys(DungeonKey) as DungeonKey[];
+
+    const index = dungeons.indexOf(this.bossId);
+    const prevIndex = index - 1;
+
+    let prev: DungeonKey = dungeons[prevIndex];
+    if ( prev === DungeonKey.CastleTower ) {
+      prev = DungeonKey.TurtleRock;
     }
 
-    this._bossId = number;
+    this._bossId = prev;
   }
 
   reset(): void {

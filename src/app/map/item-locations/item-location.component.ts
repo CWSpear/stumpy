@@ -6,6 +6,7 @@ import { ItemLocationService } from './item-location.service';
 
 import { CaptionService } from '../../caption/caption.service';
 import { CamelCasePipe } from '../../camel-case.pipe';
+import { LocationKey } from './location-key';
 
 @Component({
   selector: 'stumpy-item-location',
@@ -22,7 +23,7 @@ export class ItemLocationComponent implements OnInit {
   }
 
   @Input()
-  itemLocationId: number;
+  itemLocationId: LocationKey;
 
   private itemLocation: ItemLocation;
 

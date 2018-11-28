@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Location } from '../dungeon/location';
+import { DungeonKey } from '../dungeon/dungeon-key';
 
 import { ItemService } from '../items/item.service';
 import { SettingsService } from '../settings/settings.service';
@@ -11,25 +11,25 @@ export class BossService {
     private _settings: SettingsService,
     private _items: ItemService
   ) {
-    this._bossMap = new Map<Location, () => boolean>(
+    this._bossMap = new Map<DungeonKey, () => boolean>(
       [
-        [ Location.CastleTower, this.canDefeatAgahnim ],
-        [ Location.EasternPalace, this.canDefeatArmosKnights ],
-        [ Location.DesertPalace, this.canDefeatLanmolas ],
-        [ Location.TowerOfHera, this.canDefeatMoldorm ],
-        [ Location.PalaceOfDarkness, this.canDefeatHelmasaurKing ],
-        [ Location.SwampPalace, this.canDefeatArrghus ],
-        [ Location.SkullWoods, this.canDefeatMothula ],
-        [ Location.ThievesTown, this.canDefeatBlind ],
-        [ Location.IcePalace, this.canDefeatKholdstare ],
-        [ Location.MiseryMire, this.canDefeatVitreous ],
-        [ Location.TurtleRock, this.canDefeatTrinexx ],
-        [ Location.GanonsTower, this.canDefeatAgahnim ]
+        [ DungeonKey.CastleTower, this.canDefeatAgahnim ],
+        [ DungeonKey.EasternPalace, this.canDefeatArmosKnights ],
+        [ DungeonKey.DesertPalace, this.canDefeatLanmolas ],
+        [ DungeonKey.TowerOfHera, this.canDefeatMoldorm ],
+        [ DungeonKey.PalaceOfDarkness, this.canDefeatHelmasaurKing ],
+        [ DungeonKey.SwampPalace, this.canDefeatArrghus ],
+        [ DungeonKey.SkullWoods, this.canDefeatMothula ],
+        [ DungeonKey.ThievesTown, this.canDefeatBlind ],
+        [ DungeonKey.IcePalace, this.canDefeatKholdstare ],
+        [ DungeonKey.MiseryMire, this.canDefeatVitreous ],
+        [ DungeonKey.TurtleRock, this.canDefeatTrinexx ],
+        [ DungeonKey.GanonsTower, this.canDefeatAgahnim ]
       ]
     );
   }
 
-  private _bossMap: Map<Location, () => boolean>;
+  private _bossMap: Map<DungeonKey, () => boolean>;
 
   private canDefeatAgahnim(): boolean {
     return !!this._items.net || !!this._items.hammer
@@ -108,7 +108,7 @@ export class BossService {
     return items.hasMelee();
   }
 
-  canDefeatBoss(location: Location): boolean {
+  canDefeatBoss(location: DungeonKey): boolean {
     return this._bossMap.get(location).call(this);
   }
 }

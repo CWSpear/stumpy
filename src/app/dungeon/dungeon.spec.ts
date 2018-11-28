@@ -1,12 +1,12 @@
 import { Dungeon } from './dungeon';
 import { EntranceLock } from './entrance-lock';
-import { Location } from './location';
+import { DungeonKey } from './dungeon-key';
 import { Reward } from './reward';
 
 describe( 'A dungeon with no chests of randomized items and no entrance lock', () => {
   let dungeon: Dungeon;
 
-  beforeEach( () => { dungeon = new Dungeon(Location.SkullWoods, 'Rando', 'random location', 'random name', Reward.Unknown, 0, 0, 0); });
+  beforeEach( () => { dungeon = new Dungeon(DungeonKey.SkullWoods, 'Rando', 'random location', 'random name', Reward.Unknown, 0, 0, 0); });
 
   it( 'has a max chest count of zero forever.', () => {
     expect( dungeon.maxItemChests ).toEqual( 0 );
@@ -36,7 +36,7 @@ describe( 'A dungeon with no chests of randomized items and no entrance lock', (
 describe( 'A dungeon with two items inside', () => {
   let dungeon: Dungeon;
 
-  beforeEach( () => { dungeon = new Dungeon(Location.TowerOfHera, 'Rando', 'random location', 'random name', Reward.Unknown, 2, 4, 0); });
+  beforeEach( () => { dungeon = new Dungeon(DungeonKey.TowerOfHera, 'Rando', 'random location', 'random name', Reward.Unknown, 2, 4, 0); });
 
   it( 'starts with a count of two chests available.', () => {
     expect( dungeon.itemChestCount ).toEqual( 2 );
@@ -71,7 +71,7 @@ describe( 'A dungeon with a medallion lock', () => {
   let dungeon: Dungeon;
 
   beforeEach( () => {
-    dungeon = new Dungeon(Location.TurtleRock, 'Rando', 'random location', 'random name', Reward.Unknown, 0, 0, 0, EntranceLock.Unknown);
+    dungeon = new Dungeon(DungeonKey.TurtleRock, 'Rando', 'random location', 'random name', Reward.Unknown, 0, 0, 0, EntranceLock.Unknown);
   });
 
   it( 'starts in the unknown phase', () => {

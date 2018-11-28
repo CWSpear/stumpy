@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ItemKey } from './items/item-key';
 
 @Component({
   selector: 'stumpy-tracker',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class RandomizerTrackerComponent {
+  ItemKey = ItemKey;
 }

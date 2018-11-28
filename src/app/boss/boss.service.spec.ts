@@ -9,7 +9,7 @@ import { ItemKey } from '../items/item-key';
 
 import { SwordLogic } from '../settings/sword-logic';
 
-import { Location } from '../dungeon/location';
+import { DungeonKey } from '../dungeon/dungeon-key';
 
 describe( 'The boss service', () => {
   let bossService: BossService;
@@ -20,7 +20,7 @@ describe( 'The boss service', () => {
     itemService.reset();
   }
 
-  function validate(location: Location, value: any) {
+  function validate(location: DungeonKey, value: any) {
     expect( bossService.canDefeatBoss(location)).toBe(value);
   }
 
@@ -36,87 +36,87 @@ describe( 'The boss service', () => {
     beforeEach( reset );
 
     it( 'cannot defeat the Armos Knights at the start.', () => {
-      validate(Location.EasternPalace, false);
+      validate(DungeonKey.EasternPalace, false);
     });
 
     it( 'cannot defeat the Lanmolas at the start.', () => {
-      validate(Location.DesertPalace, false);
+      validate(DungeonKey.DesertPalace, false);
     });
 
     it( 'cannot defeat Moldorm at the start.', () => {
-      validate(Location.TowerOfHera, false);
+      validate(DungeonKey.TowerOfHera, false);
     });
 
     it( 'cannot defeat Agahnim at the start.', () => {
-      validate(Location.CastleTower, false);
+      validate(DungeonKey.CastleTower, false);
     });
 
     it( 'can defeat Agahnim with the bug net.', () => {
       itemService.setItemState(ItemKey.Net, 1);
 
-      validate(Location.CastleTower, true);
+      validate(DungeonKey.CastleTower, true);
     });
 
     it( 'cannot defeat the Helmasaur King at the start.', () => {
-      validate(Location.PalaceOfDarkness, false);
+      validate(DungeonKey.PalaceOfDarkness, false);
     });
 
     it( 'can defeat the Helmasaur King with bombs and bow.', () => {
       itemService.setItemState(ItemKey.Bomb, 1);
       itemService.setItemState(ItemKey.Bow, 1);
 
-      validate(Location.PalaceOfDarkness, true);
+      validate(DungeonKey.PalaceOfDarkness, true);
     });
 
     it( 'can defeat the Helmasaur King with just the hammer.', () => {
       itemService.setItemState(ItemKey.Hammer, 1);
 
-      validate(Location.PalaceOfDarkness, true);
+      validate(DungeonKey.PalaceOfDarkness, true);
     });
 
     it( 'cannot defeat Arrghus at the start.', () => {
-      validate(Location.SwampPalace, false);
+      validate(DungeonKey.SwampPalace, false);
     });
 
     it( 'can defeat Arrghus with the hookshot and bombs. LOTS of bombs.', () => {
       itemService.setItemState(ItemKey.Hookshot, 1);
       itemService.setItemState(ItemKey.Bomb, 1);
 
-      validate(Location.SwampPalace, true);
+      validate(DungeonKey.SwampPalace, true);
     });
 
     it( 'cannot defeat Mothula at the start.', () => {
-      validate(Location.SkullWoods, false);
+      validate(DungeonKey.SkullWoods, false);
     });
 
     it( 'cannot defeat Blind at the start.', () => {
-      validate(Location.ThievesTown, false);
+      validate(DungeonKey.ThievesTown, false);
     });
 
     it( 'cannot defeat Kholdstare at the start.', () => {
-      validate(Location.IcePalace, false);
+      validate(DungeonKey.IcePalace, false);
     });
 
     it( 'can defeat Kholdstare with bombos and sword.', () => {
       itemService.setItemState(ItemKey.Bombos, 1);
       itemService.setItemState(ItemKey.Sword, 2);
 
-      validate(Location.IcePalace, true);
+      validate(DungeonKey.IcePalace, true);
     });
 
     it( 'cannot defeat Vittreous at the start.', () => {
-      validate(Location.MiseryMire, false);
+      validate(DungeonKey.MiseryMire, false);
     });
 
     it( 'cannot defeat Trinexx at the start.', () => {
-      validate(Location.TurtleRock, false);
+      validate(DungeonKey.TurtleRock, false);
     });
 
     it( 'cannot defeat Trinexx even with the fire rod and hammer.', () => {
       itemService.setItemState(ItemKey.FireRod, 1);
       itemService.setItemState(ItemKey.Hammer, 1);
 
-      validate(Location.TurtleRock, false);
+      validate(DungeonKey.TurtleRock, false);
     });
 
     it( 'can defeat Trinexx with both rods and hammer.', () => {
@@ -124,7 +124,7 @@ describe( 'The boss service', () => {
       itemService.setItemState(ItemKey.IceRod, 1);
       itemService.setItemState(ItemKey.Hammer, 1);
 
-      validate(Location.TurtleRock, true);
+      validate(DungeonKey.TurtleRock, true);
     });
   });
 
@@ -143,7 +143,7 @@ describe( 'The boss service', () => {
       itemService.setItemState(ItemKey.FireRod, 1);
       itemService.setItemState(ItemKey.Hammer, 1);
 
-      validate(Location.IcePalace, true);
+      validate(DungeonKey.IcePalace, true);
     });
   });
 

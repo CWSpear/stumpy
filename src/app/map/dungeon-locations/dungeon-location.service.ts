@@ -7,7 +7,7 @@ import { BossService } from '../../boss/boss.service';
 
 import { Availability } from '../availability';
 import { Dungeon } from '../../dungeon/dungeon';
-import { Location } from '../../dungeon/location';
+import { DungeonKey } from '../../dungeon/dungeon-key';
 import { EntranceLock } from '../../dungeon/entrance-lock';
 
 import { DungeonLocation } from './dungeon-location';
@@ -26,44 +26,44 @@ export class DungeonLocationService {
     private _boss: BossService
   ) {
     this._dungeonLocations = DungeonLocations;
-    this._bossAvailability = new Map<Location, () => Availability>(
+    this._bossAvailability = new Map<DungeonKey, () => Availability>(
       [
-        [Location.CastleTower, this.canNavigateCastleTower],
-        [Location.EasternPalace, this.canNavigateEasternPalace],
-        [Location.DesertPalace, this.canNavigateDesertPalace],
-        [Location.TowerOfHera, this.canNavigateTowerOfHera],
-        [Location.PalaceOfDarkness, this.canNavigatePalaceOfDarkness],
-        [Location.SwampPalace, this.canNavigateSwampPalace],
-        [Location.SkullWoods, this.canNavigateSkullWoods],
-        [Location.ThievesTown, this.canNavigateThievesTown],
-        [Location.IcePalace, this.canNavigateIcePalace],
-        [Location.MiseryMire, this.canNavigateMiseryMire],
-        [Location.TurtleRock, this.canNavigateTurtleRock],
-        [Location.GanonsTower, this.canNavigateGanonsTower]
+        [DungeonKey.CastleTower, this.canNavigateCastleTower],
+        [DungeonKey.EasternPalace, this.canNavigateEasternPalace],
+        [DungeonKey.DesertPalace, this.canNavigateDesertPalace],
+        [DungeonKey.TowerOfHera, this.canNavigateTowerOfHera],
+        [DungeonKey.PalaceOfDarkness, this.canNavigatePalaceOfDarkness],
+        [DungeonKey.SwampPalace, this.canNavigateSwampPalace],
+        [DungeonKey.SkullWoods, this.canNavigateSkullWoods],
+        [DungeonKey.ThievesTown, this.canNavigateThievesTown],
+        [DungeonKey.IcePalace, this.canNavigateIcePalace],
+        [DungeonKey.MiseryMire, this.canNavigateMiseryMire],
+        [DungeonKey.TurtleRock, this.canNavigateTurtleRock],
+        [DungeonKey.GanonsTower, this.canNavigateGanonsTower]
       ]
     );
 
-    this._chestAvailability = new Map<Location, () => Availability>(
+    this._chestAvailability = new Map<DungeonKey, () => Availability>(
       [
-        [Location.CastleTower, this.canRaidCastleTower],
-        [Location.EasternPalace, this.canRaidEasternPalace],
-        [Location.DesertPalace, this.canRaidDesertPalace],
-        [Location.TowerOfHera, this.canRaidTowerOfHera],
-        [Location.PalaceOfDarkness, this.canRaidPalaceOfDarkness],
-        [Location.SwampPalace, this.canRaidSwampPalace],
-        [Location.SkullWoods, this.canRaidSkullWoods],
-        [Location.ThievesTown, this.canRaidThievesTown],
-        [Location.IcePalace, this.canRaidIcePalace],
-        [Location.MiseryMire, this.canRaidMiseryMire],
-        [Location.TurtleRock, this.canRaidTurtleRock],
-        [Location.GanonsTower, this.canRaidGanonsTower]
+        [DungeonKey.CastleTower, this.canRaidCastleTower],
+        [DungeonKey.EasternPalace, this.canRaidEasternPalace],
+        [DungeonKey.DesertPalace, this.canRaidDesertPalace],
+        [DungeonKey.TowerOfHera, this.canRaidTowerOfHera],
+        [DungeonKey.PalaceOfDarkness, this.canRaidPalaceOfDarkness],
+        [DungeonKey.SwampPalace, this.canRaidSwampPalace],
+        [DungeonKey.SkullWoods, this.canRaidSkullWoods],
+        [DungeonKey.ThievesTown, this.canRaidThievesTown],
+        [DungeonKey.IcePalace, this.canRaidIcePalace],
+        [DungeonKey.MiseryMire, this.canRaidMiseryMire],
+        [DungeonKey.TurtleRock, this.canRaidTurtleRock],
+        [DungeonKey.GanonsTower, this.canRaidGanonsTower]
       ]
     );
   }
 
-  private _bossAvailability: Map<Location, () => Availability>;
-  private _chestAvailability: Map<Location, () => Availability>;
-  private _dungeonLocations: Map<Location, DungeonLocation>;
+  private _bossAvailability: Map<DungeonKey, () => Availability>;
+  private _chestAvailability: Map<DungeonKey, () => Availability>;
+  private _dungeonLocations: Map<DungeonKey, DungeonLocation>;
 
   private canEnterCastleTower(): Availability {
     const items = this._inventory;
@@ -94,14 +94,14 @@ export class DungeonLocationService {
 
     const canNavigateDungeon = items.hasReliableWeapon();
 
-    const canBeatAgahnim = this._boss.canDefeatBoss(Location.CastleTower);
+    const canBeatAgahnim = this._boss.canDefeatBoss(DungeonKey.CastleTower);
 
     if ( !canEnter || !canNavigateDungeon || !canBeatAgahnim ) {
       return Availability.Unavailable;
     }
 
     if ( this._settings.isKeysanity() ) {
-      const dungeon = this._dungeons.getDungeon(Location.CastleTower);
+      const dungeon = this._dungeons.getDungeon(DungeonKey.CastleTower);
       if ( dungeon.smallKeyCount !== dungeon.maxSmallKeys ) {
         return Availability.Unavailable;
       }
@@ -116,7 +116,7 @@ export class DungeonLocationService {
     }
 
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.CastleTower);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.CastleTower);
 
     let hasMeleeWeapon: boolean;
     if ( this._settings.isSwordless() ) {
@@ -143,7 +143,7 @@ export class DungeonLocationService {
   }
 
   private canNavigateEasternPalace(): Availability {
-    const dungeon = this._dungeons.getDungeon(Location.EasternPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.EasternPalace);
     if ( this._settings.isKeysanity() && !dungeon.hasBigKey ) {
       return Availability.Unavailable;
     }
@@ -188,7 +188,7 @@ export class DungeonLocationService {
   }
 
   private canRaidEasternPalace(): Availability {
-    const dungeon = this._dungeons.getDungeon(Location.EasternPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.EasternPalace);
     const items = this._inventory;
     if ( this._settings.isKeysanity() ) {
       return this.canRaidEasternPalaceInkeysanity( dungeon, items );
@@ -223,7 +223,7 @@ export class DungeonLocationService {
 
   private canNavigateDesertPalace(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.DesertPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.DesertPalace);
     const isKeysanity = this._settings.isKeysanity();
 
     const canEnter = this.canEnterDesertPalace();
@@ -282,7 +282,7 @@ export class DungeonLocationService {
 
   private canRaidDesertPalace(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.DesertPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.DesertPalace);
 
     const canEnter = this.canEnterDesertPalace();
     if ( canEnter !== Availability.Available ) {
@@ -321,7 +321,7 @@ export class DungeonLocationService {
   }
 
   private canNavigateTowerOfHera(): Availability {
-    const dungeon = this._dungeons.getDungeon(Location.TowerOfHera);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.TowerOfHera);
     const items = this._inventory;
 
     const canEnter = this.canEnterTowerOfHera();
@@ -346,7 +346,7 @@ export class DungeonLocationService {
 
   private canRaidTowerOfHera(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.TowerOfHera);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.TowerOfHera);
 
     const canEnter = this.canEnterTowerOfHera();
     if ( canEnter === Availability.Unavailable ) {
@@ -415,7 +415,7 @@ export class DungeonLocationService {
 
   private canNavigatePalaceOfDarkness(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.PalaceOfDarkness);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.PalaceOfDarkness);
 
     const canEnter = this.canEnterPalaceOfDarkness();
     if ( canEnter === Availability.Unavailable ) {
@@ -517,7 +517,7 @@ export class DungeonLocationService {
 
   private canRaidPalaceOfDarkness(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon( Location.PalaceOfDarkness );
+    const dungeon = this._dungeons.getDungeon( DungeonKey.PalaceOfDarkness );
 
     const canEnter = this.canEnterPalaceOfDarkness();
     if ( canEnter === Availability.Unavailable ) {
@@ -595,7 +595,7 @@ export class DungeonLocationService {
       return Availability.Unavailable;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.SwampPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.SwampPalace);
 
     if ( !this._boss.canDefeatBoss(dungeon.bossId)) {
       return Availability.Unavailable;
@@ -641,7 +641,7 @@ export class DungeonLocationService {
 
   private canRaidSwampPalace(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.SwampPalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.SwampPalace);
 
     const canEnter = this.canEnterSwampPalace();
     if ( canEnter === Availability.Unavailable ) {
@@ -715,7 +715,7 @@ export class DungeonLocationService {
       return Availability.Unavailable;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.SkullWoods);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.SkullWoods);
     if (!this._boss.canDefeatBoss(dungeon.bossId)) {
       return Availability.Unavailable;
     }
@@ -729,7 +729,7 @@ export class DungeonLocationService {
 
   private canRaidSkullWoods(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.SkullWoods);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.SkullWoods);
     const canEnter = this.canEnterSkullWoods();
     if ( canEnter === Availability.Unavailable ) {
       return canEnter;
@@ -770,7 +770,7 @@ export class DungeonLocationService {
 
   private canNavigateThievesTown(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.ThievesTown);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.ThievesTown);
 
     const canEnter = this.canEnterSkullWoods();
     if ( canEnter === Availability.Unavailable ) {
@@ -794,7 +794,7 @@ export class DungeonLocationService {
   }
 
   private canRaidThievesTown(): Availability {
-    const dungeon = this._dungeons.getDungeon(Location.ThievesTown);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.ThievesTown);
     const items = this._inventory;
     const canEnter = this.canEnterSkullWoods();
     if ( canEnter === Availability.Unavailable ) {
@@ -846,7 +846,7 @@ export class DungeonLocationService {
 
   private canNavigateIcePalace(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.IcePalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.IcePalace);
 
     const canEnter = this.canEnterIcePalace();
     if ( canEnter === Availability.Unavailable ) {
@@ -897,7 +897,7 @@ export class DungeonLocationService {
       return !!items.hammer && canAvoidBunnyRevival ? Availability.Available : Availability.Glitches;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.IcePalace);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.IcePalace);
     const keys = dungeon.smallKeyCount;
     const chests = dungeon.totalChestCount;
 
@@ -940,7 +940,7 @@ export class DungeonLocationService {
     }
 
     // We must have the right weapon and the right medallion.
-    const medallionState = this.medallionState( Location.MiseryMire );
+    const medallionState = this.medallionState( DungeonKey.MiseryMire );
     return medallionState;
   }
 
@@ -962,7 +962,7 @@ export class DungeonLocationService {
       return medallionState;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.MiseryMire);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.MiseryMire);
     if ( !this._boss.canDefeatBoss(dungeon.bossId)) {
       return Availability.Unavailable;
     }
@@ -1017,7 +1017,7 @@ export class DungeonLocationService {
 
   private canRaidMiseryMire(): Availability {
     const items = this._inventory;
-    const dungeon = this._dungeons.getDungeon(Location.MiseryMire);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.MiseryMire);
 
     if (!items.boots && !items.hookshot) {
       return Availability.Unavailable;
@@ -1070,7 +1070,7 @@ export class DungeonLocationService {
     }
 
     // We must have the right weapon and the right medallion.
-    const medallionState = this.medallionState( Location.TurtleRock );
+    const medallionState = this.medallionState( DungeonKey.TurtleRock );
 
     if ( medallionState === Availability.Unavailable ) {
       return medallionState;
@@ -1109,7 +1109,7 @@ export class DungeonLocationService {
       return Availability.Unavailable;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.TurtleRock);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.TurtleRock);
     if ( !this._boss.canDefeatBoss(dungeon.bossId)) {
       return Availability.Unavailable;
     }
@@ -1201,7 +1201,7 @@ export class DungeonLocationService {
       return Availability.Unavailable;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.TurtleRock);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.TurtleRock);
     const hasLaserSafety = this.hasLaserBridgeSafety();
 
     if ( this._settings.isKeysanity() ) {
@@ -1275,7 +1275,7 @@ export class DungeonLocationService {
       return Availability.Unavailable;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.GanonsTower);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.GanonsTower);
     if ( !this._boss.canDefeatBoss(dungeon.bossId)) {
       return Availability.Unavailable;
     }
@@ -1305,7 +1305,7 @@ export class DungeonLocationService {
       return canEnter;
     }
 
-    const dungeon = this._dungeons.getDungeon(Location.GanonsTower);
+    const dungeon = this._dungeons.getDungeon(DungeonKey.GanonsTower);
     const chests = dungeon.totalChestCount;
     const keys = dungeon.smallKeyCount;
     const hasFireSource = items.hasFireSource();
@@ -1407,7 +1407,7 @@ export class DungeonLocationService {
     return !!this._inventory.byrna || !!this._inventory.cape || this._inventory.shield === Shield.Mirror;
   }
 
-  private medallionState( location: Location ): Availability {
+  private medallionState( location: DungeonKey ): Availability {
     const dungeon = this._dungeons.getDungeon( location );
     if ( dungeon.entranceLock === EntranceLock.None) {
       return Availability.Available;
@@ -1443,22 +1443,22 @@ export class DungeonLocationService {
   }
 
   private isCastleTowerDefeated(): boolean {
-    return this._dungeons.getDungeon(Location.CastleTower).isBossDefeated;
+    return this._dungeons.getDungeon(DungeonKey.CastleTower).isBossDefeated;
   }
 
-  getBossAvailability(id: Location): Availability {
+  getBossAvailability(id: DungeonKey): Availability {
     return this._bossAvailability.get(id).call(this);
   }
 
-  getChestAvailability(id: Location): Availability {
+  getChestAvailability(id: DungeonKey): Availability {
     return this._chestAvailability.get(id).call(this);
   }
 
-  getDungeonLocation(id: Location): DungeonLocation {
+  getDungeonLocation(id: DungeonKey): DungeonLocation {
     return this._dungeonLocations.get(id);
   }
 
-  getBossName(id: Location): string {
+  getBossName(id: DungeonKey): string {
     const geographicDungeon = this._dungeons.getDungeon(id);
     const bossId = geographicDungeon.bossId;
     if ( bossId === id ) {
@@ -1469,7 +1469,7 @@ export class DungeonLocationService {
     return bossDungeon.bossName;
   }
 
-  hasChestsOrBossClaimed(id: Location): boolean {
+  hasChestsOrBossClaimed(id: DungeonKey): boolean {
     const dungeon = this._dungeons.getDungeon(id);
 
     if ( this._settings.isKeysanity() ) {
@@ -1486,7 +1486,7 @@ export class DungeonLocationService {
     return dungeon.isBossDefeated;
   }
 
-  isBossDefeated(id: Location): boolean {
+  isBossDefeated(id: DungeonKey): boolean {
     return this._dungeons.getDungeon(id).isBossDefeated;
   }
 

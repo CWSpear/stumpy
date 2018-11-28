@@ -425,13 +425,13 @@ export class ItemService {
     this._items.forEach( e => e.state = 0 );
   }
 
-  setItemState(id: number, state: number): void {
+  setItemState(id: ItemKey, state: number): void {
     this._itemMap.get(id).call(this, state);
 
     this._localStorage.setItem('ITEM_STORE', ItemService.serialize(this._items));
   }
 
-  private getStandardItemClasses(id: number): any {
+  private getStandardItemClasses(id: ItemKey): any {
     const results = {
       isActive: this.isActive(id)
     };
@@ -567,7 +567,7 @@ export class ItemService {
     return results;
   }
 
-  getItemClasses(id: number): any {
+  getItemClasses(id: ItemKey): any {
     if ( !this._classMap.has(id)) {
       return this.getStandardItemClasses(id);
     }
@@ -575,15 +575,15 @@ export class ItemService {
     return this._classMap.get(id).call(this);
   }
 
-  isActive(id: number): boolean {
+  isActive(id: ItemKey): boolean {
     return this.getItem(id).isActive;
   }
 
-  getImage(id: number): string {
+  getImage(id: ItemKey): string {
     return this.getItem(id).image;
   }
 
-  getItem(id: number): Item {
+  getItem(id: ItemKey): Item {
     return this._items.get(id);
   }
 

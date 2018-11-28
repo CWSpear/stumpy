@@ -1,12 +1,12 @@
 import { Dungeon } from './dungeon';
 import { EntranceLock } from './entrance-lock';
-import { Location } from './location';
+import { DungeonKey } from './dungeon-key';
 import { Reward } from './reward';
 
-export const Dungeons = new Map<Location, Dungeon>(
+export const Dungeons = new Map<DungeonKey, Dungeon>(
   [ [
-    Location.CastleTower, new Dungeon(
-      Location.CastleTower,
+    DungeonKey.CastleTower, new Dungeon(
+      DungeonKey.CastleTower,
       'CT',
       'Agahnim\'s Tower',
       'Agahnim',
@@ -16,8 +16,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       2
     )
   ], [
-    Location.EasternPalace, new Dungeon(
-      Location.EasternPalace,
+    DungeonKey.EasternPalace, new Dungeon(
+      DungeonKey.EasternPalace,
       'EP',
       'Eastern Palace',
       'Armos Knights',
@@ -27,8 +27,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       0
     )
   ], [
-    Location.DesertPalace, new Dungeon(
-      Location.DesertPalace,
+    DungeonKey.DesertPalace, new Dungeon(
+      DungeonKey.DesertPalace,
       'DP',
       'Desert Palace',
       'Lanmolas',
@@ -38,8 +38,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       1
     )
   ], [
-    Location.TowerOfHera, new Dungeon(
-      Location.TowerOfHera,
+    DungeonKey.TowerOfHera, new Dungeon(
+      DungeonKey.TowerOfHera,
       'ToH',
       'Tower of Hera',
       'Moldorm',
@@ -49,8 +49,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       1
     )
   ], [
-    Location.PalaceOfDarkness, new Dungeon(
-      Location.PalaceOfDarkness,
+    DungeonKey.PalaceOfDarkness, new Dungeon(
+      DungeonKey.PalaceOfDarkness,
       'PoD',
       'Palace of Darkness',
       'Helmasaur King',
@@ -60,8 +60,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       6
     )
   ], [
-    Location.SwampPalace, new Dungeon(
-      Location.SwampPalace,
+    DungeonKey.SwampPalace, new Dungeon(
+      DungeonKey.SwampPalace,
       'SP',
       'Swamp Palace',
       'Arrghus',
@@ -71,8 +71,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       1
     )
   ], [
-    Location.SkullWoods, new Dungeon(
-      Location.SkullWoods,
+    DungeonKey.SkullWoods, new Dungeon(
+      DungeonKey.SkullWoods,
       'SW',
       'Skull Woods',
       'Mothula',
@@ -82,8 +82,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       3
     )
   ], [
-    Location.ThievesTown, new Dungeon(
-      Location.ThievesTown,
+    DungeonKey.ThievesTown, new Dungeon(
+      DungeonKey.ThievesTown,
       'TT',
       'Thieves Town',
       'Blind',
@@ -93,8 +93,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       1
     )
   ], [
-    Location.IcePalace, new Dungeon(
-      Location.IcePalace,
+    DungeonKey.IcePalace, new Dungeon(
+      DungeonKey.IcePalace,
       'IP',
       'Ice Palace',
       'Kholdstare',
@@ -104,8 +104,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       2
     )
   ], [
-    Location.MiseryMire, new Dungeon(
-      Location.MiseryMire,
+    DungeonKey.MiseryMire, new Dungeon(
+      DungeonKey.MiseryMire,
       'MM',
       'Misery Mire',
       'Vitreous',
@@ -116,8 +116,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       EntranceLock.Unknown
     )
   ], [
-    Location.TurtleRock, new Dungeon(
-      Location.TurtleRock,
+    DungeonKey.TurtleRock, new Dungeon(
+      DungeonKey.TurtleRock,
       'TR',
       'Turtle Rock',
       'Trinexx',
@@ -128,8 +128,8 @@ export const Dungeons = new Map<Location, Dungeon>(
       EntranceLock.Unknown
     )
   ], [
-    Location.GanonsTower, new Dungeon(
-      Location.GanonsTower,
+    DungeonKey.GanonsTower, new Dungeon(
+      DungeonKey.GanonsTower,
       'GT',
       'Ganon\'s Tower',
       'Agahnim 2',

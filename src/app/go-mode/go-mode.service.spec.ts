@@ -11,7 +11,7 @@ import { WordSpacingPipe } from '../word-spacing.pipe';
 
 import { Dungeon } from '../dungeon/dungeon';
 
-import { Location } from '../dungeon/location';
+import { DungeonKey } from '../dungeon/dungeon-key';
 import { ItemKey } from '../items/item-key';
 
 import { Goal } from '../settings/goal';
@@ -85,35 +85,35 @@ describe( 'The Go Mode service', () => {
     });
 
     function setVanillaDungeonRewards() {
-      dungeonService.getDungeon(Location.PalaceOfDarkness).cycleReward();
-      dungeonService.getDungeon(Location.PalaceOfDarkness).cycleReward();
-      dungeonService.getDungeon(Location.PalaceOfDarkness).cycleReward();
+      dungeonService.getDungeon(DungeonKey.PalaceOfDarkness).cycleReward();
+      dungeonService.getDungeon(DungeonKey.PalaceOfDarkness).cycleReward();
+      dungeonService.getDungeon(DungeonKey.PalaceOfDarkness).cycleReward();
 
-      dungeonService.getDungeon(Location.SwampPalace).cycleReward();
-      dungeonService.getDungeon(Location.SwampPalace).cycleReward();
-      dungeonService.getDungeon(Location.SwampPalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SwampPalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SwampPalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SwampPalace).cycleReward();
 
-      dungeonService.getDungeon(Location.SkullWoods).cycleReward();
-      dungeonService.getDungeon(Location.SkullWoods).cycleReward();
-      dungeonService.getDungeon(Location.SkullWoods).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SkullWoods).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SkullWoods).cycleReward();
+      dungeonService.getDungeon(DungeonKey.SkullWoods).cycleReward();
 
-      dungeonService.getDungeon(Location.ThievesTown).cycleReward();
-      dungeonService.getDungeon(Location.ThievesTown).cycleReward();
-      dungeonService.getDungeon(Location.ThievesTown).cycleReward();
+      dungeonService.getDungeon(DungeonKey.ThievesTown).cycleReward();
+      dungeonService.getDungeon(DungeonKey.ThievesTown).cycleReward();
+      dungeonService.getDungeon(DungeonKey.ThievesTown).cycleReward();
 
-      dungeonService.getDungeon(Location.IcePalace).cycleReward();
-      dungeonService.getDungeon(Location.IcePalace).cycleReward();
-      dungeonService.getDungeon(Location.IcePalace).cycleReward();
-      dungeonService.getDungeon(Location.IcePalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.IcePalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.IcePalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.IcePalace).cycleReward();
+      dungeonService.getDungeon(DungeonKey.IcePalace).cycleReward();
 
-      dungeonService.getDungeon(Location.MiseryMire).cycleReward();
-      dungeonService.getDungeon(Location.MiseryMire).cycleReward();
-      dungeonService.getDungeon(Location.MiseryMire).cycleReward();
-      dungeonService.getDungeon(Location.MiseryMire).cycleReward();
+      dungeonService.getDungeon(DungeonKey.MiseryMire).cycleReward();
+      dungeonService.getDungeon(DungeonKey.MiseryMire).cycleReward();
+      dungeonService.getDungeon(DungeonKey.MiseryMire).cycleReward();
+      dungeonService.getDungeon(DungeonKey.MiseryMire).cycleReward();
 
-      dungeonService.getDungeon(Location.TurtleRock).cycleReward();
-      dungeonService.getDungeon(Location.TurtleRock).cycleReward();
-      dungeonService.getDungeon(Location.TurtleRock).cycleReward();
+      dungeonService.getDungeon(DungeonKey.TurtleRock).cycleReward();
+      dungeonService.getDungeon(DungeonKey.TurtleRock).cycleReward();
+      dungeonService.getDungeon(DungeonKey.TurtleRock).cycleReward();
     }
 
     it( 'requires knowing more than which dungeons are the crystal dungeons.', () => {

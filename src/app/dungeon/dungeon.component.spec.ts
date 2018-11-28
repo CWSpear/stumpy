@@ -8,7 +8,7 @@ import { LocalStorageService } from '../local-storage.service';
 import { CamelCasePipe } from '../camel-case.pipe';
 import { WordSpacingPipe } from '../word-spacing.pipe';
 
-import { Location } from './location';
+import { DungeonKey } from './dungeon-key';
 import { EntranceLock } from './entrance-lock';
 import { Reward } from './reward';
 

@@ -3,11 +3,8 @@ export class Item {
     private _name: string,
     private _activeStates: Array<boolean>,
     private _images: Array<string>,
-  ) {
-    this._state = 0;
-  }
-
-  private _state: number;
+    private _state: number = 0,
+) {}
 
   get name(): string {
     return this._name;

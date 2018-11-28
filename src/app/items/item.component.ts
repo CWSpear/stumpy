@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ItemService } from './item.service';
+import { ItemKey } from './item-key';
 
 @Component( {
   providers: [],
@@ -14,7 +15,7 @@ export class ItemComponent {
   ) {}
 
   @Input()
-  itemId: number;
+  itemId: ItemKey;
 
   whenClicked(evt: MouseEvent): void {
     evt.stopPropagation();

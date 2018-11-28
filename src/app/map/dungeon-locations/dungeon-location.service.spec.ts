@@ -9,7 +9,7 @@ import { WordSpacingPipe } from '../../word-spacing.pipe';
 
 import { Availability } from '../availability';
 
-import { Location } from '../../dungeon/location';
+import { DungeonKey } from '../../dungeon/dungeon-key';
 import { ItemKey } from '../../items/item-key';
 
 import { ItemShuffle } from '../../settings/item-shuffle';
@@ -39,11 +39,11 @@ describe( 'The dungeon location service', () => {
 
   beforeEach( reset );
 
-  function checkChestAvailability( location: Location, availability: Availability ) {
+  function checkChestAvailability( location: DungeonKey, availability: Availability ) {
     expect( dungeonLocationService.getChestAvailability(location)).toBe(availability);
   }
 
-  function checkBossAvailability( location: Location, availability: Availability ) {
+  function checkBossAvailability( location: DungeonKey, availability: Availability ) {
     expect( dungeonLocationService.getBossAvailability(location)).toBe(availability);
   }
 
@@ -54,7 +54,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to Agahnim\'s Tower', () => {
-      const location = Location.CastleTower;
+      const location = DungeonKey.CastleTower;
 
       describe( 'with a sword available', () => {
         it( 'starts off as unavailable.', () => {
@@ -130,7 +130,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the Eastern Palace', () => {
-      const location = Location.EasternPalace;
+      const location = DungeonKey.EasternPalace;
 
       describe( '-- the boss --', () => {
         it( 'cannot be beaten at the start.', () => {
@@ -173,7 +173,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the Desert Palace', () => {
-      const location = Location.DesertPalace;
+      const location = DungeonKey.DesertPalace;
 
       describe( '-- the boss --', () => {
         it( 'cannot be defeated without a melee weapon, bow, cane, or rod.', () => {
@@ -241,7 +241,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the Tower of Hera', () => {
-      const location = Location.TowerOfHera;
+      const location = DungeonKey.TowerOfHera;
 
       it( 'starts off as unavailable to reach.', () => {
         checkBossAvailability( location, Availability.Unavailable );
@@ -288,7 +288,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the Palace of Darkness', () => {
-      const location = Location.PalaceOfDarkness;
+      const location = DungeonKey.PalaceOfDarkness;
 
       describe( '-- the boss --', () => {
         it( 'cannot be beaten with no items.', () => {
@@ -398,7 +398,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the Swamp Palace', () => {
-      const location = Location.SwampPalace;
+      const location = DungeonKey.SwampPalace;
 
       describe( '-- the boss --', () => {
         it( 'is not assailable at the start.', () => {
@@ -604,7 +604,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe('set to the Skull Woods', () => {
-      const location = Location.SkullWoods;
+      const location = DungeonKey.SkullWoods;
 
       describe('-- the boss --', () => {
         it( 'cannot be beaten right away.', () => {
@@ -612,7 +612,7 @@ describe( 'The dungeon location service', () => {
         });
 
         it( 'needs a way to get to get to the other side of the world.', () => {
-          dungeonService.getDungeon(Location.CastleTower).toggleDefeat();
+          dungeonService.getDungeon(DungeonKey.CastleTower).toggleDefeat();
           itemService.getItem(ItemKey.Glove).state = 1;
           itemService.getItem(ItemKey.Flippers).state = 1;
           itemService.getItem(ItemKey.MoonPearl).state = 1;
@@ -621,7 +621,7 @@ describe( 'The dungeon location service', () => {
         });
 
         it( 'needs more than outcast access.', () => {
-          dungeonService.getDungeon(Location.CastleTower).toggleDefeat();
+          dungeonService.getDungeon(DungeonKey.CastleTower).toggleDefeat();
           itemService.getItem(ItemKey.Hookshot).state = 1;
           itemService.getItem(ItemKey.Flippers).state = 1;
           itemService.getItem(ItemKey.MoonPearl).state = 1;
@@ -630,7 +630,7 @@ describe( 'The dungeon location service', () => {
         });
 
         it( 'needs more than the fire rod assuming a non swordless mode.', () => {
-          dungeonService.getDungeon(Location.CastleTower).toggleDefeat();
+          dungeonService.getDungeon(DungeonKey.CastleTower).toggleDefeat();
           itemService.getItem(ItemKey.Hookshot).state = 1;
           itemService.getItem(ItemKey.Flippers).state = 1;
           itemService.getItem(ItemKey.MoonPearl).state = 1;
@@ -640,7 +640,7 @@ describe( 'The dungeon location service', () => {
         });
 
         it( 'needs more than the sword to cut the curtains assuming a non swordless mode.', () => {
-          dungeonService.getDungeon(Location.CastleTower).toggleDefeat();
+          dungeonService.getDungeon(DungeonKey.CastleTower).toggleDefeat();
           itemService.getItem(ItemKey.Hookshot).state = 1;
           itemService.getItem(ItemKey.Flippers).state = 1;
           itemService.getItem(ItemKey.MoonPearl).state = 1;
@@ -676,7 +676,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the thieves town dungeon', () => {
-      const location = Location.ThievesTown;
+      const location = DungeonKey.ThievesTown;
 
       describe( '-- the boss --', () => {
         it( 'starts off as unavailable.', () => {
@@ -734,7 +734,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the ice palace', () => {
-      const location = Location.IcePalace;
+      const location = DungeonKey.IcePalace;
 
       describe( '-- the boss --', () => {
         it( 'starts off as unavailable.', () => {
@@ -842,7 +842,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to misery mire', () => {
-      const location = Location.MiseryMire;
+      const location = DungeonKey.MiseryMire;
 
       describe('-- the boss --', () => {
         it( 'starts off as unavailable.', () => {
@@ -1022,7 +1022,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to turtle rock', () => {
-      const location = Location.TurtleRock;
+      const location = DungeonKey.TurtleRock;
 
       describe( '-- the boss --', () => {
         it( 'starts off as unavailable.', () => {
@@ -1277,7 +1277,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the castle tower ', () => {
-      const location = Location.CastleTower;
+      const location = DungeonKey.CastleTower;
 
       describe( '-- the boss --', () => {
         it( 'starts off as unavailable.', () => {
@@ -1334,7 +1334,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the eastern palace', () => {
-      const location = Location.EasternPalace;
+      const location = DungeonKey.EasternPalace;
 
       describe( '-- the boss --', () => {
         it( 'cannot be beaten without the big key on hand.', () => {
@@ -1425,7 +1425,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the desert palace', () => {
-      const location = Location.DesertPalace;
+      const location = DungeonKey.DesertPalace;
 
       describe( '-- the boss --', () => {
         it( 'cannot be beaten without the big key on hand.', () => {
@@ -1552,7 +1552,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the tower of hera', () => {
-      const location = Location.TowerOfHera;
+      const location = DungeonKey.TowerOfHera;
 
       describe( '-- the boss --', () => {
         it( 'requires more than a sword to get up to the tower.', () => {
@@ -1743,7 +1743,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the palace of darkness', () => {
-      const location = Location.PalaceOfDarkness;
+      const location = DungeonKey.PalaceOfDarkness;
 
       describe( '-- the boss --', () => {
         it( 'requires more than standard equipment to get through.', () => {
@@ -1991,7 +1991,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the swamp palace', () => {
-      const location = Location.SwampPalace;
+      const location = DungeonKey.SwampPalace;
 
       describe('-- the boss --', () => {
         it( 'requires a small key in order to enter.', () => {
@@ -2111,7 +2111,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the skull woods chests', () => {
-      const location = Location.SkullWoods;
+      const location = DungeonKey.SkullWoods;
 
       it( 'is possible to get everything at the start, assuming the place is reached.', () => {
         itemService.setItemState(ItemKey.MoonPearl, 1);
@@ -2176,7 +2176,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the theives town', () => {
-      const location = Location.ThievesTown;
+      const location = DungeonKey.ThievesTown;
 
       describe( '-- the boss --', () => {
         it( 'is not possible to reach unless the big key is on hand.', () => {
@@ -2258,7 +2258,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the ice palace', () => {
-      const location = Location.IcePalace;
+      const location = DungeonKey.IcePalace;
 
       describe('-- the boss --', () => {
         it( 'can maybe be reached if lucky at the start.', () => {
@@ -2372,7 +2372,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to the misery mire', () => {
-      const location = Location.MiseryMire;
+      const location = DungeonKey.MiseryMire;
 
       describe('-- the boss --', () => {
         it( 'requires the big key to get to the room.', () => {
@@ -2542,7 +2542,7 @@ describe( 'The dungeon location service', () => {
     });
 
     describe( 'set to turtle rock', () => {
-      const location = Location.TurtleRock;
+      const location = DungeonKey.TurtleRock;
 
       describe( '-- the boss --', () => {
         it( 'requires more than outside items to get to the boss.', () => {

@@ -104,55 +104,55 @@
   font-size: 2.1rem;
 }
 
-.boss.boss0 {
+.boss.boss-CastleTower {
   background-image: url('/assets/bosses/agahnim0.png');
 }
 
-.boss.boss0.isBeaten {
+.boss.boss-CastleTower.isBeaten {
   background-image: url('/assets/bosses/agahnim1.png');
 }
 
-.boss.boss1 {
+.boss.boss-EasternPalace {
   background-image: url('/assets/bosses/armosKnights.png');
 }
 
-.boss.boss2 {
+.boss.boss-DesertPalace {
   background-image: url('/assets/bosses/lanmolas.png');
 }
 
-.boss.boss3 {
+.boss.boss-TowerOfHera {
   background-image: url('/assets/bosses/moldorm.png');
 }
 
-.boss.boss4 {
+.boss.boss-PalaceOfDarkness {
   background-image: url('/assets/bosses/helmasaurKing.png');
 }
 
-.boss.boss5 {
+.boss.boss-SwampPalace {
   background-image: url('/assets/bosses/arrghus.png');
 }
 
-.boss.boss6 {
+.boss.boss-SkullWoods {
   background-image: url('/assets/bosses/mothula.png');
 }
 
-.boss.boss7 {
+.boss.boss-ThievesTown {
   background-image: url('/assets/bosses/blind.png');
 }
 
-.boss.boss8 {
+.boss.boss-IcePalace {
   background-image: url('/assets/bosses/kholdstare.png');
 }
 
-.boss.boss9 {
+.boss.boss-MiseryMire {
   background-image: url('/assets/bosses/vitreous.png');
 }
 
-.boss.boss10 {
+.boss.boss-TurtleRock {
   background-image: url('/assets/bosses/trinexx.png');
 }
 
-.boss.boss11 {
+.boss.boss-GanonsTower {
   background-image: url('/assets/bosses/ganonTower.png');
 }
 

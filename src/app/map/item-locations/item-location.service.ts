@@ -14,7 +14,7 @@ import { SettingsService } from '../../settings/settings.service';
 import { ItemLocations } from './item-location.repository';
 
 import { EntranceLock } from '../../dungeon/entrance-lock';
-import { Location } from '../../dungeon/location';
+import { DungeonKey } from '../../dungeon/dungeon-key';
 
 @Injectable()
 export class ItemLocationService {
@@ -116,7 +116,7 @@ export class ItemLocationService {
       : Availability.Unavailable;
   }
 
-  private medallionState( location: Location ): Availability {
+  private medallionState( location: DungeonKey ): Availability {
     const dungeon = this._dungeons.getDungeon( location );
     if ( dungeon.entranceLock === EntranceLock.None) {
       return Availability.Available;
@@ -173,7 +173,7 @@ export class ItemLocationService {
   }
 
   private isAgahnimDefeated(): boolean {
-    return this._dungeons.getDungeon(Location.CastleTower).isBossDefeated;
+    return this._dungeons.getDungeon(DungeonKey.CastleTower).isBossDefeated;
   }
 
   private hasSouthDarkWorldFromPyramidAccess(): boolean {
@@ -238,13 +238,13 @@ export class ItemLocationService {
       return Availability.Unavailable;
     }
 
-    const medallionState = this.medallionState( Location.TurtleRock);
+    const medallionState = this.medallionState( DungeonKey.TurtleRock);
     if ( medallionState !== Availability.Available ) {
       return medallionState;
     }
 
     if ( this._settings.isKeysanity() ) {
-      if ( this._dungeons.getDungeon(Location.TurtleRock).smallKeyCount <= 1 ) {
+      if ( this._dungeons.getDungeon(DungeonKey.TurtleRock).smallKeyCount <= 1 ) {
         return Availability.Unavailable;
       }
 
@@ -794,27 +794,27 @@ export class ItemLocationService {
     return this._itemLocations;
   }
 
-  getItemLocation(id: number): ItemLocation {
+  getItemLocation(id: LocationKey): ItemLocation {
     return this.itemLocations.get(id);
   }
 
-  isOutside(id: number): boolean {
+  isOutside(id: LocationKey): boolean {
     return this.getItemLocation(id).isOutside();
   }
 
-  isInPit(id: number): boolean {
+  isInPit(id: LocationKey): boolean {
     return this.getItemLocation(id).isInPit();
   }
 
-  isOutOfPit(id: number): boolean {
+  isOutOfPit(id: LocationKey): boolean {
     return this.getItemLocation(id).isOutOfPit();
   }
 
-  isInSingleEntranceCave(id: number): boolean {
+  isInSingleEntranceCave(id: LocationKey): boolean {
     return this.getItemLocation(id).isInSingleEntranceCave();
   }
 
-  isInMultipleEntranceCave(id: number): boolean {
+  isInMultipleEntranceCave(id: LocationKey): boolean {
     return this.getItemLocation(id).isInMultipleEntranceCave();
   }
 

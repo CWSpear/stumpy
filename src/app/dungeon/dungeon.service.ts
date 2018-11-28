@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { EntranceLock } from './entrance-lock';
-import { Location } from './location';
+import { DungeonKey } from './dungeon-key';
 import { Dungeon } from './dungeon';
 import { Reward } from './reward';
 
@@ -13,8 +13,8 @@ export class DungeonService {
     this._dungeons = Dungeons;
   }
 
-  private _dungeons: Map<Location, Dungeon>;
-  get dungeons(): Map<Location, Dungeon> {
+  private _dungeons: Map<DungeonKey, Dungeon>;
+  get dungeons(): Map<DungeonKey, Dungeon> {
     return this._dungeons;
   }
 
@@ -53,7 +53,7 @@ export class DungeonService {
     return this.areAllRewardDungeonsBeaten();
   }
 
-  getDungeon(id: number): Dungeon {
+  getDungeon(id: DungeonKey): Dungeon {
     return this.dungeons.get(id);
   }
 
@@ -75,8 +75,8 @@ export class DungeonService {
       .filter( d => d.reward === Reward.StandardPendant || d.reward === Reward.GreenPendant );
   }
 
-  hasBigKey(id: number): boolean {
-    return id !== Location.CastleTower;
+  hasBigKey(id: DungeonKey): boolean {
+    return id !== DungeonKey.CastleTower;
   }
 
   private areAllRewardDungeonsBeaten(): boolean {

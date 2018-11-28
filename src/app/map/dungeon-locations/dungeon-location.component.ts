@@ -7,6 +7,7 @@ import { CaptionService } from '../../caption/caption.service';
 import { CamelCasePipe } from '../../camel-case.pipe';
 
 import { Availability } from '../availability';
+import { DungeonKey } from '../../dungeon/dungeon-key';
 
 @Component({
   selector: 'stumpy-dungeon-location',
@@ -22,7 +23,7 @@ export class DungeonLocationComponent implements OnInit {
   ) {}
 
   @Input()
-  dungeonLocationId: number;
+  dungeonLocationId: DungeonKey;
 
   private _dungeonLocation: DungeonLocation;
 

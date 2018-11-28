@@ -6,6 +6,7 @@ import { SettingsService } from '../settings/settings.service';
 import { Dungeon } from './dungeon';
 import { Reward } from './reward';
 import { CamelCasePipe } from '../camel-case.pipe';
+import { DungeonKey } from './dungeon-key';
 
 @Component({
   selector: 'stumpy-dungeon',
@@ -20,7 +21,7 @@ export class DungeonComponent implements OnInit {
   ) { }
 
   @Input()
-  dungeonId: number;
+  dungeonId: DungeonKey;
 
   private dungeon: Dungeon;
 
@@ -60,7 +61,7 @@ export class DungeonComponent implements OnInit {
     const results = {
       isBeaten: this.dungeon.isBossDefeated
     };
-    results['boss' + this.dungeon.bossId] = true;
+    results['boss-' + this.dungeon.bossId] = true;
     return results;
   }
 
